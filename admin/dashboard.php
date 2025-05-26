@@ -118,7 +118,7 @@ $recent_orders = $pdo->query("
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    Quick Links
+                    Admin Links
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">

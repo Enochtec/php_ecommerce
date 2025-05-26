@@ -12,7 +12,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="index.php">
-                <i class="bi bi-shop me-2"></i>Ecommerce
+                <i class="bi bi-shop me-2"></i>ShopEasy
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                     </li>
                     <?php if (isLoggedIn() && isAdmin()): ?>
                         <li class="nav-item">
-                            <a class="nav-link px-3 py-2 rounded-3 mx-1 bg-warning text-dark" href="admin/dashboard.php">
+                            <a class="nav-link px-3 py-2 rounded-3 mx-1 bg-warning text-dark" href="../admin/dashboard.php">
                                 <i class="bi bi-speedometer2 me-1"></i>Admin
                             </a>
                         </li>
