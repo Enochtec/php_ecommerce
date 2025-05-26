@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart']) && isL
 }
 ?>
 
-<?php include 'header.php'; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mt-4">
     <div class="row">
@@ -83,4 +83,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart']) && isL
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

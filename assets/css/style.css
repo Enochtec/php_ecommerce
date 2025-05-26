@@ -505,3 +505,141 @@ footer a:hover {
 @keyframes spinner-border {
   to { transform: rotate(360deg); }
 }
+
+
+
+/* header */
+/* ===== Professional E-Commerce Header Styles ===== */
+.navbar {
+    background-color: #2c3e50 !important; /* Dark blue instead of pure black */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    color: #fff !important;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1.2rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 1.2rem;
+    width: calc(100% - 2.4rem);
+    height: 2px;
+    background: #3498db;
+    transform: scaleX(1);
+}
+
+.nav-item {
+    margin: 0 0.2rem;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #2c3e50 !important;
+    transform: translateX(5px);
+}
+
+.badge {
+    font-size: 0.65rem;
+    padding: 0.35em 0.65em;
+    margin-left: 3px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Cart icon specific styles */
+.bi-cart {
+    font-size: 1.2rem;
+    position: relative;
+    top: -1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        padding: 1rem 0;
+        background-color: #2c3e50;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-item {
+        margin: 0.3rem 0;
+    }
+    
+    .nav-link {
+        padding: 0.7rem 1.5rem !important;
+    }
+    
+    .dropdown-menu {
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, 0.05);
+        margin-left: 1rem;
+        width: calc(100% - 2rem);
+    }
+}
+
+/* Admin link highlight */
+.nav-link[href*="admin"] {
+    color: #f39c12 !important;
+}
+
+.nav-link[href*="admin"]:hover::after {
+    background: #f39c12;
+}

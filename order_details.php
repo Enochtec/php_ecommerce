@@ -35,10 +35,10 @@ $stmt->execute([$order_id]);
 $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?php include 'header.php'; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mt-4">
-    <h2 class="mb-4">Order #<?php echo $order['order_id']; ?></h2>
+    <h2 class="mb-4">Order #ESC0<?php echo $order['order_id']; ?></h2>
     
     <div class="row">
         <div class="col-md-6">
@@ -137,4 +137,4 @@ $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

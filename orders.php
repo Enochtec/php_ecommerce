@@ -32,7 +32,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Order #</th>
+                        <th>Order #ESC0</th>
                         <th>Date</th>
                         <th>Items</th>
                         <th>Total</th>

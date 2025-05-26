@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include '../header.php'; ?>
+<?php include '../includes/header.php'; ?>
 
 <div class="container mt-4">
     <h2 class="mb-4">Edit Product</h2>
@@ -147,4 +147,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
-<?php include '../footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

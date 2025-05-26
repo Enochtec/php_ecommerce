@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 }
 ?>
 
-<?php include 'header.php'; ?>
+<?php include 'includes/header.php'; ?>
 
 <div class="container mt-4">
     <h2 class="mb-4">Shopping Cart</h2>
@@ -283,4 +283,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     <?php endif; ?>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

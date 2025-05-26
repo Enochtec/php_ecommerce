@@ -72,7 +72,7 @@ $recent_orders = $pdo->query("
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Order #</th>
+                                <th>Order #ESC0</th>
                                 <th>Customer</th>
                                 <th>Date</th>
                                 <th>Total</th>

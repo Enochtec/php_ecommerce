@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
 }
 ?>
 
-<?php include '../header.php'; ?>
+<?php include '../includes/header.php'; ?>
 
 <div class="container mt-4">
     <h2 class="mb-4">Order #<?php echo $order['order_id']; ?></h2>
@@ -159,4 +159,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     </div>
 </div>
 
-<?php include '../footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

@@ -49,7 +49,7 @@ $orders = $pdo->query("
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Order #</th>
+                    <th>Order #ESC0</th>
                     <th>Customer</th>
                     <th>Date</th>
                     <th>Total</th>
