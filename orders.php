@@ -7,7 +7,6 @@ if (!isLoggedIn()) {
 
 $user_id = $_SESSION['user_id'];
 
-// Get user orders
 $stmt = $pdo->prepare("
     SELECT o.*, COUNT(oi.order_item_id) as item_count 
     FROM orders o 
@@ -22,49 +21,55 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include 'includes/header.php'; ?>
 
-<div class="container mt-4">
-    <h2 class="mb-4">My Orders</h2>
-    
+  <script src="https://cdn.tailwindcss.com"></script>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <h2 class="text-2xl font-bold mb-6">My Orders</h2>
+
     <?php if (empty($orders)): ?>
-        <div class="alert alert-info">You haven't placed any orders yet. <a href="products.php">Start shopping</a></div>
+        <div class="bg-blue-100 text-blue-700 p-4 rounded-md mb-4">
+            You haven't placed any orders yet. <a href="products.php" class="underline font-medium">Start shopping</a>
+        </div>
     <?php else: ?>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-100 text-gray-700">
                     <tr>
-                        <th>Order #ESC0</th>
-                        <th>Date</th>
-                        <th>Items</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Order #ESC0</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Date</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Items</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Total</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Status</th>
+                        <th class="px-4 py-3 text-left text-sm font-semibold">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white divide-y divide-gray-200 text-sm">
                     <?php foreach ($orders as $order): ?>
                         <tr>
-                            <td><?php echo $order['order_id']; ?></td>
-                            <td><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
-                            <td><?php echo $order['item_count']; ?></td>
-                            <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
-                            <td>
-                                <span class="badge 
+                            <td class="px-4 py-2"><?php echo $order['order_id']; ?></td>
+                            <td class="px-4 py-2"><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
+                            <td class="px-4 py-2"><?php echo $order['item_count']; ?></td>
+                            <td class="px-4 py-2">$<?php echo number_format($order['total_amount'], 2); ?></td>
+                            <td class="px-4 py-2">
+                                <span class="inline-block px-2 py-1 text-xs font-semibold rounded 
                                     <?php 
-                                    switch ($order['status']) {
-                                        case 'pending': echo 'bg-warning'; break;
-                                        case 'processing': echo 'bg-info'; break;
-                                        case 'shipped': echo 'bg-primary'; break;
-                                        case 'delivered': echo 'bg-success'; break;
-                                        case 'cancelled': echo 'bg-danger'; break;
-                                        default: echo 'bg-secondary';
-                                    }
+                                        switch ($order['status']) {
+                                            case 'pending': echo 'bg-yellow-200 text-yellow-800'; break;
+                                            case 'processing': echo 'bg-blue-200 text-blue-800'; break;
+                                            case 'shipped': echo 'bg-indigo-200 text-indigo-800'; break;
+                                            case 'delivered': echo 'bg-green-200 text-green-800'; break;
+                                            case 'cancelled': echo 'bg-red-200 text-red-800'; break;
+                                            default: echo 'bg-gray-200 text-gray-800';
+                                        }
                                     ?>
                                 ">
                                     <?php echo ucfirst($order['status']); ?>
                                 </span>
                             </td>
-                            <td>
-                                <a href="order_details.php?id=<?php echo $order['order_id']; ?>" class="btn btn-sm btn-primary">View</a>
+                            <td class="px-4 py-2">
+                                <a href="order_details.php?id=<?php echo $order['order_id']; ?>" class="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm font-medium">
+                                    View
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
