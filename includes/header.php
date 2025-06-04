@@ -101,16 +101,30 @@
                 </div>
                 
                 <!-- Search Bar -->
-                <div class="flex-1 max-w-2xl mx-8 hidden md:block">
-                    <div class="relative">
-                        <form action="search.php" method="GET" class="flex">
-                            <input type="text" name="q" class="w-full border-2 border-gray-200 rounded-l-lg px-4 py-3 text-base focus:outline-none focus:border-orange-600" placeholder="Search products, brands and categories">
-                            <button type="submit" class="bg-orange-600 text-white px-6 py-3 rounded-r-lg font-semibold hover:bg-orange-700 transition-colors">
-                                Search
-                            </button>
-                        </form>
-                    </div>
-                </div>
+              <div class="flex-1 max-w-2xl mx-8 hidden md:block">
+    <div class="relative">
+        <form action="products.php" method="GET" class="flex">
+            <input 
+                type="text" 
+                name="search" 
+                class="w-full border-2 border-gray-200 rounded-l-lg px-4 py-3 text-base focus:outline-none focus:border-orange-600" 
+                placeholder="Search products, brands and categories"
+                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+            >
+            <button 
+                type="submit" 
+                class="bg-orange-600 text-white px-6 py-3 rounded-r-lg font-semibold hover:bg-orange-700 transition-colors"
+            >
+                Search
+            </button>
+        </form>
+        
+        <!-- Optional: Add search suggestions dropdown -->
+        <div id="searchSuggestions" class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+            <!-- Suggestions will be populated here via JavaScript -->
+        </div>
+    </div>
+</div>
                 
                 <!-- Header Actions -->
                 <div class="flex items-center space-x-6">
@@ -280,6 +294,70 @@
                 });
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('input[name="search"]');
+    const searchForm = document.querySelector('form[action="products.php"]');
+    const suggestionsContainer = document.getElementById('searchSuggestions');
+    
+    // Debounce function to limit how often we make API requests
+    function debounce(func, wait) {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
+    
+    // Fetch search suggestions
+    const fetchSuggestions = debounce(function(query) {
+        if (query.length < 2) {
+            suggestionsContainer.classList.add('hidden');
+            return;
+        }
+        
+        fetch(`api/search_suggestions.php?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    suggestionsContainer.innerHTML = data.map(item => `
+                        <a href="products.php?search=${encodeURIComponent(item)}" class="block px-4 py-2 hover:bg-gray-100">${item}</a>
+                    `).join('');
+                    suggestionsContainer.classList.remove('hidden');
+                } else {
+                    suggestionsContainer.classList.add('hidden');
+                }
+            })
+            .catch(() => suggestionsContainer.classList.add('hidden'));
+    }, 300);
+    
+    // Event listeners
+    searchInput.addEventListener('input', function() {
+        fetchSuggestions(this.value);
+    });
+    
+    searchInput.addEventListener('focus', function() {
+        if (this.value.length >= 2) {
+            fetchSuggestions(this.value);
+        }
+    });
+    
+    document.addEventListener('click', function(e) {
+        if (!searchForm.contains(e.target)) {
+            suggestionsContainer.classList.add('hidden');
+        }
+    });
+    
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowDown' && !suggestionsContainer.classList.contains('hidden')) {
+            e.preventDefault();
+            const firstSuggestion = suggestionsContainer.querySelector('a');
+            if (firstSuggestion) firstSuggestion.focus();
+        }
+    });
+});
     </script>
 </body>
 </html>
