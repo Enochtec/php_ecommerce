@@ -37,96 +37,203 @@ $categories = getCategories();
 <div class="min-h-screen bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Sidebar Categories -->
+      <!-- Sidebar Categories - Improved Styling -->
       <div class="w-full lg:w-1/5">
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
           <div class="bg-gradient-to-r from-primary-600 to-primary-800 px-6 py-4">
-            <h3 class="text-lg font-semibold text-white">Shop Categories</h3>
+            <h3 class="text-lg font-semibold text-white flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+              </svg>
+              Shop Categories
+            </h3>
           </div>
-          <ul class="divide-y divide-gray-100">
+          <ul class="divide-y divide-gray-100 max-h-[calc(100vh-300px)] overflow-y-auto">
             <?php if (!empty($categories)): ?>
               <?php foreach ($categories as $category): ?>
-                <li class="px-6 py-3 hover:bg-gray-50 transition-colors duration-150">
+                <li class="px-6 py-3 hover:bg-gray-50 transition-colors duration-200 group">
                   <a href="products.php?category_id=<?= $category['category_id']; ?>" 
                      class="flex items-center text-gray-700 hover:text-primary-600 font-medium">
-                    <span class="ml-3"><?= htmlspecialchars($category['name']); ?></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <?php if(isset($category['icon'])): ?>
+                      <span class="text-gray-400 group-hover:text-primary-500 mr-3"><?= $category['icon'] ?></span>
+                    <?php else: ?>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-primary-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                      </svg>
+                    <?php endif; ?>
+                    <span class="flex-grow"><?= htmlspecialchars($category['name']); ?></span>
+                    <span class="text-xs bg-primary-100 text-primary-800 px-2 py-1 rounded-full"><?= rand(10, 200) ?></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 text-gray-400 group-hover:text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
                 </li>
               <?php endforeach; ?>
             <?php else: ?>
-              <li class="px-6 py-4 text-gray-500">No categories available.</li>
+              <li class="px-6 py-4 text-gray-500 flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                No categories available
+              </li>
             <?php endif; ?>
           </ul>
+          
+          <!-- Promo Banner -->
+          <div class="bg-gradient-to-r from-orange-500 to-pink-500 p-4 text-white">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 bg-white bg-opacity-20 p-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h4 class="font-bold">Special Offer</h4>
+                <p class="text-sm">Up to 60% off</p>
+              </div>
+            </div>
+          </div>
         </div>
         
-        <!-- Promo Banner -->
-        <div class="mt-6 bg-gradient-to-r from-primary-500 to-primary-700 rounded-xl p-6 text-white">
-          <h4 class="font-bold text-lg mb-2">Summer Sale</h4>
-          <p class="text-sm mb-4">Up to 50% off selected items</p>
-          <a href="#" class="inline-block bg-white text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-opacity-90 transition">Shop Now</a>
+        <!-- Additional Filters -->
+        <div class="mt-6 bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="bg-gradient-to-r from-primary-600 to-primary-800 px-6 py-4">
+            <h3 class="text-lg font-semibold text-white">Filters</h3>
+          </div>
+          <div class="p-4">
+            <div class="mb-4">
+              <h4 class="font-medium text-gray-700 mb-2">Price Range</h4>
+              <div class="flex items-center justify-between space-x-4">
+                <input type="number" placeholder="Min" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                <span class="text-gray-500">to</span>
+                <input type="number" placeholder="Max" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+              </div>
+            </div>
+            <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors">
+              Apply Filters
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="w-full lg:w-4/5">
-        <!-- Carousel -->
-     <!-- Carousel -->
-<div class="relative rounded-2xl overflow-hidden shadow-2xl mb-12 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200/50 dark:border-slate-700/50">
-  <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner rounded-2xl overflow-hidden">
-      <?php $colorSlides = [
-        ["bg-gradient-to-r from-purple-500 to-indigo-600", "Premium Collection"],
-        ["bg-gradient-to-r from-emerald-500 to-teal-600", "New Arrivals"],
-        ["bg-gradient-to-r from-amber-500 to-orange-600", "Limited Time Offers"]
-      ]; ?>
-      <?php foreach ($colorSlides as $index => $slide): ?>
-        <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?> relative">
-          <div class="<?= $slide[0]; ?> w-full h-[400px] flex items-center justify-center transition-all duration-700">
-            <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-lg"><?= $slide[1]; ?></h2>
+        <!-- Multi-Item Advertisement Carousel -->
+        <div class="relative rounded-2xl overflow-hidden shadow-xl mb-12">
+          <div class="relative h-64 overflow-hidden">
+            <!-- Carousel Container -->
+            <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-full">
+              <!-- Slide Group 1 -->
+              <div class="w-full flex-shrink-0 flex">
+                <!-- Ad 1 -->
+                <div class="w-1/3 h-full relative">
+                  <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80" 
+                       alt="Electronics Sale" 
+                       class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                      <h3 class="text-xl font-bold mb-1">Electronics</h3>
+                      <p class="text-sm mb-2">Up to 70% Off</p>
+                      <a href="#" class="inline-block bg-white text-primary-600 px-3 py-1 rounded-full text-xs font-semibold">Shop Now</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Ad 2 -->
+                <div class="w-1/3 h-full relative">
+                  <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                       alt="Fashion Collection" 
+                       class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                      <h3 class="text-xl font-bold mb-1">Fashion</h3>
+                      <p class="text-sm mb-2">New Arrivals</p>
+                      <a href="#" class="inline-block bg-white text-pink-600 px-3 py-1 rounded-full text-xs font-semibold">Explore</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Ad 3 -->
+                <div class="w-1/3 h-full relative">
+                  <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" 
+                       alt="Home & Garden" 
+                       class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                      <h3 class="text-xl font-bold mb-1">Home & Garden</h3>
+                      <p class="text-sm mb-2">Special Deals</p>
+                      <a href="#" class="inline-block bg-white text-green-600 px-3 py-1 rounded-full text-xs font-semibold">Discover</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Slide Group 2 -->
+              <div class="w-full flex-shrink-0 flex">
+                <!-- Ad 4 -->
+                <div class="w-1/3 h-full relative">
+                  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                       alt="Sports & Fitness" 
+                       class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                      <h3 class="text-xl font-bold mb-1">Sports</h3>
+                      <p class="text-sm mb-2">Gear Up</p>
+                      <a href="#" class="inline-block bg-white text-orange-600 px-3 py-1 rounded-full text-xs font-semibold">Shop Now</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Ad 5 -->
+                <div class="w-1/3 h-full relative">
+                  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1999&q=80" 
+                       alt="Watches" 
+                       class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                      <h3 class="text-xl font-bold mb-1">Watches</h3>
+                      <p class="text-sm mb-2">Luxury Brands</p>
+                      <a href="#" class="inline-block bg-white text-purple-600 px-3 py-1 rounded-full text-xs font-semibold">View All</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Ad 6 -->
+                <div class="w-1/3 h-full relative">
+                  <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80" 
+                       alt="Beauty Products" 
+                       class="w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                      <h3 class="text-xl font-bold mb-1">Beauty</h3>
+                      <p class="text-sm mb-2">New Collection</p>
+                      <a href="#" class="inline-block bg-white text-rose-600 px-3 py-1 rounded-full text-xs font-semibold">Explore</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110">
+              <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            
+            <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110">
+              <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+
+            <!-- Slide Indicators -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              <button class="indicator w-2 h-2 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all duration-300" data-slide="0"></button>
+              <button class="indicator w-2 h-2 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all duration-300" data-slide="1"></button>
+            </div>
           </div>
         </div>
-      <?php endforeach; ?>
-    </div>
-    
-    <!-- Previous Button -->
-    <button class="carousel-control-prev absolute left-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg border border-white/20 group" 
-            type="button" 
-            data-bs-target="#carouselExample" 
-            data-bs-slide="prev">
-      <svg class="w-5 h-5 text-slate-700 group-hover:text-slate-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    
-    <!-- Next Button -->
-    <button class="carousel-control-next absolute right-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg border border-white/20 group" 
-            type="button" 
-            data-bs-target="#carouselExample" 
-            data-bs-slide="next">
-      <svg class="w-5 h-5 text-slate-700 group-hover:text-slate-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
-      <span class="visually-hidden">Next</span>
-    </button>
-    
-    <!-- Slide Indicators -->
-    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-      <?php foreach ($colorSlides as $index => $slide): ?>
-        <button type="button" 
-                data-bs-target="#carouselExample" 
-                data-bs-slide-to="<?= $index; ?>" 
-                class="w-3 h-3 rounded-full bg-white/60 hover:bg-white transition-all duration-300 <?= $index === 0 ? 'bg-white' : ''; ?>"
-                aria-current="<?= $index === 0 ? 'true' : 'false'; ?>" 
-                aria-label="Slide <?= $index + 1; ?>">
-        </button>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</div>
 
         <!-- Featured Products -->
         <div class="mb-6 flex justify-between items-center">
@@ -139,6 +246,7 @@ $categories = getCategories();
           </a>
         </div>
         
+        <!-- Product Grid (unchanged from your original) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <?php if (!empty($featured_products)): ?>
             <?php foreach ($featured_products as $product): ?>
@@ -208,5 +316,65 @@ $categories = getCategories();
     </div>
   </div>
 </div>
+
+<script>
+// Carousel functionality for multi-item ads
+let currentSlide = 0;
+const totalSlides = 2; // Now we have 2 groups of 3 ads each
+const carousel = document.getElementById('carousel');
+const indicators = document.querySelectorAll('.indicator');
+
+function updateCarousel() {
+  carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+  
+  // Update indicators
+  indicators.forEach((indicator, index) => {
+    if (index === currentSlide) {
+      indicator.classList.remove('bg-opacity-60');
+      indicator.classList.add('bg-opacity-100', 'w-3');
+    } else {
+      indicator.classList.remove('bg-opacity-100', 'w-3');
+      indicator.classList.add('bg-opacity-60');
+    }
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateCarousel();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateCarousel();
+}
+
+// Event listeners
+document.getElementById('nextBtn').addEventListener('click', nextSlide);
+document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+// Indicator clicks
+indicators.forEach((indicator, index) => {
+  indicator.addEventListener('click', () => {
+    currentSlide = index;
+    updateCarousel();
+  });
+});
+
+// Auto-play carousel
+let carouselInterval = setInterval(nextSlide, 5000);
+
+// Pause on hover
+carousel.addEventListener('mouseenter', () => {
+  clearInterval(carouselInterval);
+});
+
+carousel.addEventListener('mouseleave', () => {
+  carouselInterval = setInterval(nextSlide, 5000);
+});
+
+// Initialize
+updateCarousel();
+</script>
 
 <?php include 'includes/footer.php'; ?>

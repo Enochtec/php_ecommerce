@@ -81,77 +81,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
 
 <?php include 'includes/header.php'; ?>
 
-<div class="container mt-4">
-    <h2 class="mb-4">My Profile</h2>
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+    <h2 class="text-2xl font-bold mb-6">My Profile</h2>
     
     <?php if (!empty($errors)): ?>
-        <?php foreach ($errors as $error): ?>
-            <?php echo displayError($error); ?>
-        <?php endforeach; ?>
+        <div class="mb-6">
+            <?php foreach ($errors as $error): ?>
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-2" role="alert">
+                    <?php echo $error; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
     
     <?php if ($success): ?>
-        <?php echo displaySuccess($success); ?>
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+            <?php echo $success; ?>
+        </div>
     <?php endif; ?>
     
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    Profile Information
+    <div class="flex flex-col md:flex-row gap-6">
+        <div class="w-full md:w-1/2">
+            <div class="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
+                <div class="bg-gray-100 px-6 py-4 border-b">
+                    <h3 class="font-semibold text-lg">Profile Information</h3>
                 </div>
-                <div class="card-body">
+                <div class="p-6">
                     <form method="POST">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" value="<?php echo $user['username']; ?>" disabled>
+                        <div class="mb-4">
+                            <label for="username" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100" 
+                                   id="username" value="<?php echo htmlspecialchars($user['username']); ?>" disabled>
                         </div>
-                        <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $user['first_name']; ?>" required>
+                        <div class="mb-4">
+                            <label for="first_name" class="block text-gray-700 text-sm font-medium mb-2">First Name</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="first_name" name="first_name" value="<?php echo htmlspecialchars($user['first_name']); ?>" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $user['last_name']; ?>" required>
+                        <div class="mb-4">
+                            <label for="last_name" class="block text-gray-700 text-sm font-medium mb-2">Last Name</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="last_name" name="last_name" value="<?php echo htmlspecialchars($user['last_name']); ?>" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>" required>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+                            <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $user['phone']; ?>">
+                        <div class="mb-4">
+                            <label for="phone" class="block text-gray-700 text-sm font-medium mb-2">Phone</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
                         </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" id="address" name="address"><?php echo $user['address']; ?></textarea>
+                        <div class="mb-4">
+                            <label for="address" class="block text-gray-700 text-sm font-medium mb-2">Address</label>
+                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                      id="address" name="address" rows="3"><?php echo htmlspecialchars($user['address']); ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Update Profile
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    Change Password
+        <div class="w-full md:w-1/2">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-gray-100 px-6 py-4 border-b">
+                    <h3 class="font-semibold text-lg">Change Password</h3>
                 </div>
-                <div class="card-body">
+                <div class="p-6">
                     <form method="POST">
-                        <div class="mb-3">
-                            <label for="current_password" class="form-label">Current Password</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password" required>
+                        <div class="mb-4">
+                            <label for="current_password" class="block text-gray-700 text-sm font-medium mb-2">Current Password</label>
+                            <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="current_password" name="current_password" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="new_password" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="new_password" name="new_password" required>
+                        <div class="mb-4">
+                            <label for="new_password" class="block text-gray-700 text-sm font-medium mb-2">New Password</label>
+                            <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="new_password" name="new_password" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        <div class="mb-4">
+                            <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirm New Password</label>
+                            <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   id="confirm_password" name="confirm_password" required>
                         </div>
-                        <button type="submit" name="change_password" class="btn btn-primary">Change Password</button>
+                        <button type="submit" name="change_password" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Change Password
+                        </button>
                     </form>
                 </div>
             </div>
