@@ -41,45 +41,100 @@
 </head>
 <body class="bg-gray-50">
     <!-- Promotional Banner -->
-    <div class="promo-banner text-white py-2 font-semibold text-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="bi bi-star-fill"></i>
-                    <span class="text-xl font-black">5</span>
-                    <div class="flex flex-col leading-tight">
-                        <span>Years</span>
-                        <small class="text-xs">WITH SHOPEASY</small>
+  <!-- Professional Promo Banner with Carousel Ads -->
+<div class="promo-banner text-white py-2 font-semibold text-sm">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Trust Badge -->
+            <div class="flex items-center gap-3 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">
+                <div class="flex items-center justify-center bg-white text-blue-600 rounded-full w-6 h-6">
+                    <i class="bi bi-check-lg text-sm"></i>
+                </div>
+                <div class="flex flex-col leading-tight">
+                    <span class="font-bold">Trusted Since 2018</span>
+                    <small class="text-xs opacity-80">5+ Years Experience</small>
+                </div>
+            </div>
+
+            <!-- Main Carousel -->
+            <div class="flex-1 max-w-2xl mx-4">
+                <div class="relative overflow-hidden h-10">
+                    <!-- Carousel Items -->
+                    <div class="absolute inset-0 flex items-center justify-center space-x-10 animate-marquee whitespace-nowrap">
+                        <div class="flex items-center">
+                            <i class="bi bi-truck mr-2"></i>
+                            <span>Free Shipping on Orders $50+</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="bi bi-arrow-repeat mr-2"></i>
+                            <span>Easy 30-Day Returns</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="bi bi-shield-check mr-2"></i>
+                            <span>Secure Checkout</span>
+                        </div>
+                        <div class="flex items-center text-yellow-300">
+                            <i class="bi bi-lightning-charge mr-2"></i>
+                            <span>Flash Sale: Up to 60% Off</span>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center">
-                    <div class="bg-black bg-opacity-80 rounded-full px-5 py-2 text-white font-bold min-w-48 carousel-transition" id="promoCarousel">
-                        <span id="carouselText">Special Offers - Limited Time</span>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <a href="products.php" class="shop-now-text text-decoration-none font-bold text-lg no-underline">
-                        <strong>Flash Sale</strong>
-                        <div class="text-xs text-white">SHOP NOW</div>
-                    </a>
-                </div>
+            </div>
+
+            <!-- Promo Buttons -->
+            <div class="flex space-x-3">
+                <a href="#" class="flex items-center bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold hover:bg-yellow-300 transition-colors">
+                    <i class="bi bi-percent mr-1"></i>
+                    <span>Today's Deals</span>
+                </a>
+                <a href="#" class="flex items-center bg-white text-blue-600 px-3 py-1 rounded-full text-sm font-bold hover:bg-gray-100 transition-colors">
+                    <i class="bi bi-stars mr-1"></i>
+                    <span>New Arrivals</span>
+                </a>
             </div>
         </div>
     </div>
+</div>
+
+<style>
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+        animation: marquee 20s linear infinite;
+    }
+</style>
 
     <!-- Main Header -->
     <div class="bg-white shadow-lg py-4">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a class="text-2xl font-bold text-decoration-none flex items-center" href="index.php">
-                        <i class="bi bi-shop text-blue-600 mr-2"></i>
-                        <span class="text-gray-800">ShopEasy</span>
-                    </a>
-                </div>
+                <!-- Logo Section (Organized but styles preserved) -->
+              <div class="flex-shrink-0">
+    <a class="text-decoration-none flex items-end group" href="index.php">
+        <!-- Slightly reduced logo size -->
+        <img src="https://cdn-icons-png.flaticon.com/512/1374/1374128.png" 
+             alt="ShopEasy" 
+             class="h-8 w-8 mr-2 transition-transform group-hover:rotate-12"> <!-- Changed from h-9 w-9 to h-8 w-8 -->
+        
+        <!-- Main logo text with subscript -->
+        <div class="flex flex-col leading-none">
+            <span class="text-2xl font-serif tracking-wide">
+                <span class="text-blue-700 font-bold">Shop</span>
+                <span class="text-gray-700 font-medium">Easy</span>
+            </span>
+            <!-- <span class="text-xs text-gray-500 mt-0.5 ml-px font-light italic">
+                Since 2018
+            </span> -->
+        </div>
+    </a>
+</div>
+
+                <!-- Adjacent Ad Banner (Unchanged) -->
+               
                 
-                <!-- Navigation Links (moved from bottom nav) -->
+                <!-- Navigation Links -->
                 <div class="hidden lg:flex items-center space-x-8">
                     <a class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors" href="index.php">
                         <i class="bi bi-house-door mr-1"></i>Home
@@ -87,10 +142,8 @@
                     <a class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors" href="products.php">
                         <i class="bi bi-grid mr-1"></i>All Products
                     </a>
-                    <a class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors" href="categories.php">
-                        <i class="bi bi-list mr-1"></i>Categories
-                    </a>
-                    <a class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors" href="deals.php">
+                   
+                    <a class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors" href="#">
                         <i class="bi bi-lightning mr-1"></i>Deals
                     </a>
                     <?php if (isLoggedIn() && isAdmin()): ?>
@@ -101,30 +154,37 @@
                 </div>
                 
                 <!-- Search Bar -->
-              <div class="flex-1 max-w-2xl mx-8 hidden md:block">
-    <div class="relative">
-        <form action="products.php" method="GET" class="flex">
-            <input 
-                type="text" 
-                name="search" 
-                class="w-full border-2 border-gray-200 rounded-l-lg px-4 py-3 text-base focus:outline-none focus:border-orange-600" 
-                placeholder="Search products, brands and categories"
-                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
-            >
-            <button 
-                type="submit" 
-                class="bg-orange-600 text-white px-6 py-3 rounded-r-lg font-semibold hover:bg-orange-700 transition-colors"
-            >
-                Search
-            </button>
-        </form>
-        
-        <!-- Optional: Add search suggestions dropdown -->
-        <div id="searchSuggestions" class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
-            <!-- Suggestions will be populated here via JavaScript -->
-        </div>
-    </div>
-</div>
+                <div class="flex-1 max-w-2xl mx-8 hidden md:block">
+                    <div class="relative">
+                        <form action="products.php" method="GET" class="flex">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                class="w-full border-2 border-gray-200 rounded-l-lg px-4 py-3 text-base focus:outline-none focus:border-orange-600" 
+                                placeholder="Search products, brands and categories"
+                                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+                                aria-label="Search products"
+                                autocomplete="off"
+                            >
+                            <button 
+                                type="submit" 
+                                class="bg-orange-600 text-white px-6 py-3 rounded-r-lg font-semibold hover:bg-orange-700 transition-colors flex items-center justify-center"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <span class="sr-only md:not-sr-only md:ml-2">Search</span>
+                            </button>
+                        </form>
+
+                        <!-- Hidden search suggestions container -->
+                        <div class="absolute z-10 hidden w-full mt-1 bg-white border-2 border-gray-200 rounded-lg shadow-lg" id="search-suggestions">
+                            <div class="py-2">
+                                <!-- Suggestions will be populated here via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>       
                 
                 <!-- Header Actions -->
                 <div class="flex items-center space-x-6">
@@ -296,68 +356,68 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.querySelector('input[name="search"]');
-    const searchForm = document.querySelector('form[action="products.php"]');
-    const suggestionsContainer = document.getElementById('searchSuggestions');
-    
-    // Debounce function to limit how often we make API requests
-    function debounce(func, wait) {
-        let timeout;
-        return function() {
-            const context = this, args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-        };
-    }
-    
-    // Fetch search suggestions
-    const fetchSuggestions = debounce(function(query) {
-        if (query.length < 2) {
-            suggestionsContainer.classList.add('hidden');
-            return;
-        }
-        
-        fetch(`api/search_suggestions.php?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    suggestionsContainer.innerHTML = data.map(item => `
-                        <a href="products.php?search=${encodeURIComponent(item)}" class="block px-4 py-2 hover:bg-gray-100">${item}</a>
-                    `).join('');
-                    suggestionsContainer.classList.remove('hidden');
-                } else {
+            const searchInput = document.querySelector('input[name="search"]');
+            const searchForm = document.querySelector('form[action="products.php"]');
+            const suggestionsContainer = document.getElementById('search-suggestions');
+            
+            // Debounce function to limit how often we make API requests
+            function debounce(func, wait) {
+                let timeout;
+                return function() {
+                    const context = this, args = arguments;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), wait);
+                };
+            }
+            
+            // Fetch search suggestions
+            const fetchSuggestions = debounce(function(query) {
+                if (query.length < 2) {
+                    suggestionsContainer.classList.add('hidden');
+                    return;
+                }
+                
+                fetch(`api/search_suggestions.php?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            suggestionsContainer.innerHTML = data.map(item => `
+                                <a href="products.php?search=${encodeURIComponent(item)}" class="block px-4 py-2 hover:bg-gray-100">${item}</a>
+                            `).join('');
+                            suggestionsContainer.classList.remove('hidden');
+                        } else {
+                            suggestionsContainer.classList.add('hidden');
+                        }
+                    })
+                    .catch(() => suggestionsContainer.classList.add('hidden'));
+            }, 300);
+            
+            // Event listeners
+            searchInput.addEventListener('input', function() {
+                fetchSuggestions(this.value);
+            });
+            
+            searchInput.addEventListener('focus', function() {
+                if (this.value.length >= 2) {
+                    fetchSuggestions(this.value);
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!searchForm.contains(e.target)) {
                     suggestionsContainer.classList.add('hidden');
                 }
-            })
-            .catch(() => suggestionsContainer.classList.add('hidden'));
-    }, 300);
-    
-    // Event listeners
-    searchInput.addEventListener('input', function() {
-        fetchSuggestions(this.value);
-    });
-    
-    searchInput.addEventListener('focus', function() {
-        if (this.value.length >= 2) {
-            fetchSuggestions(this.value);
-        }
-    });
-    
-    document.addEventListener('click', function(e) {
-        if (!searchForm.contains(e.target)) {
-            suggestionsContainer.classList.add('hidden');
-        }
-    });
-    
-    // Handle keyboard navigation
-    searchInput.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowDown' && !suggestionsContainer.classList.contains('hidden')) {
-            e.preventDefault();
-            const firstSuggestion = suggestionsContainer.querySelector('a');
-            if (firstSuggestion) firstSuggestion.focus();
-        }
-    });
-});
+            });
+            
+            // Handle keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' && !suggestionsContainer.classList.contains('hidden')) {
+                    e.preventDefault();
+                    const firstSuggestion = suggestionsContainer.querySelector('a');
+                    if (firstSuggestion) firstSuggestion.focus();
+                }
+            });
+        });
     </script>
 </body>
 </html>
