@@ -132,24 +132,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
                                         <img src="../<?php echo $item['image_url'] ?: 'https://via.placeholder.com/50'; ?>" width="50" class="me-2">
                                         <?php echo $item['name']; ?>
                                     </td>
-                                    <td>$<?php echo number_format($item['price'], 2); ?></td>
+                                    <td>Ksh<?php echo number_format($item['price'], 2); ?></td>
                                     <td><?php echo $item['quantity']; ?></td>
-                                    <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                    <td>Ksh<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="3">Subtotal</th>
-                                <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                                <td>Ksh<?php echo number_format($order['total_amount'], 2); ?></td>
                             </tr>
                             <tr>
                                 <th colspan="3">Shipping</th>
-                                <td>$0.00</td>
+                                <td>Ksh0.00</td>
                             </tr>
                             <tr>
                                 <th colspan="3">Total</th>
-                                <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                                <td>Ksh<?php echo number_format($order['total_amount'], 2); ?></td>
                             </tr>
                         </tfoot>
                     </table>

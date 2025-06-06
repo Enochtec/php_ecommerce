@@ -67,7 +67,7 @@ $orders = $pdo->query("
                             <small><?php echo $order['email']; ?></small>
                         </td>
                         <td><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
-                        <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                        <td>Ksh<?php echo number_format($order['total_amount'], 2); ?></td>
                         <td>
                             <form method="POST" class="d-flex">
                                 <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">

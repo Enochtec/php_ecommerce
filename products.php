@@ -186,10 +186,10 @@ $categories = getCategories();
                   <div class="flex items-center justify-between">
                     <div>
                       <?php if(isset($product['discount_price'])): ?>
-                        <span class="text-lg font-bold text-gray-900">$<?= number_format($product['discount_price'], 2); ?></span>
-                        <span class="text-sm text-gray-500 line-through ml-1">$<?= number_format($product['price'], 2); ?></span>
+                        <span class="text-lg font-bold text-gray-900">Ksh<?= number_format($product['discount_price'], 2); ?></span>
+                        <span class="text-sm text-gray-500 line-through ml-1">Ksh<?= number_format($product['price'], 2); ?></span>
                       <?php else: ?>
-                        <span class="text-lg font-bold text-gray-900">$<?= number_format($product['price'], 2); ?></span>
+                        <span class="text-lg font-bold text-gray-900">Ksh<?= number_format($product['price'], 2); ?></span>
                       <?php endif; ?>
                     </div>
                     <div class="flex space-x-2">

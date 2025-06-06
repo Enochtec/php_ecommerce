@@ -154,7 +154,7 @@ $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="flex items-center justify-between">
               <dt class="text-sm text-gray-600">Total amount</dt>
               <dd class="text-sm font-medium text-gray-900">
-                $<?php echo number_format($order['total_amount'], 2); ?>
+                Ksh<?php echo number_format($order['total_amount'], 2); ?>
               </dd>
             </div>
           </div>
@@ -200,7 +200,7 @@ $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p class="mt-1 text-sm text-gray-500">SKU: <?php echo substr(md5($item['product_id']), 0, 8); ?></p>
                   </div>
                   <p class="mt-2 sm:mt-0 text-sm font-medium text-gray-900">
-                    $<?php echo number_format($item['price'], 2); ?>
+                    Ksh<?php echo number_format($item['price'], 2); ?>
                   </p>
                 </div>
                 <div class="mt-4 flex-1 flex items-end justify-between">
@@ -228,17 +228,17 @@ $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class="flex justify-between">
             <dt class="text-sm text-gray-600">Subtotal</dt>
             <dd class="text-sm font-medium text-gray-900">
-              $<?php echo number_format($order['total_amount'], 2); ?>
+              Ksh<?php echo number_format($order['total_amount'], 2); ?>
             </dd>
           </div>
           <div class="flex justify-between">
             <dt class="text-sm text-gray-600">Shipping</dt>
-            <dd class="text-sm font-medium text-gray-900">$0.00</dd>
+            <dd class="text-sm font-medium text-gray-900">Ksh0.00</dd>
           </div>
           <div class="flex justify-between border-t border-gray-200 pt-4">
             <dt class="text-base font-medium text-gray-900">Total</dt>
             <dd class="text-base font-medium text-gray-900">
-              $<?php echo number_format($order['total_amount'], 2); ?>
+              Ksh<?php echo number_format($order['total_amount'], 2); ?>
             </dd>
           </div>
         </div>
@@ -247,9 +247,12 @@ $order_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Order Actions -->
     <div class="mt-8 flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4">
-      <button type="button" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-        Download invoice
-      </button>
+      <form action="generate_invoice.php" method="POST">
+        <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
+        <button type="submit" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+          Download invoice
+        </button>
+      </form>
       <button type="button" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
         Track order
       </button>

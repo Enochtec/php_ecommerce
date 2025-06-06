@@ -146,15 +146,15 @@ $user = $user->fetch(PDO::FETCH_ASSOC);
                             <tfoot>
                                 <tr>
                                     <th colspan="3">Subtotal</th>
-                                    <td>$<?php echo number_format($total, 2); ?></td>
+                                    <td>Ksh<?php echo number_format($total, 2); ?></td>
                                 </tr>
                                 <tr>
                                     <th colspan="3">Shipping</th>
-                                    <td>$0.00</td>
+                                    <td>Ksh0.00</td>
                                 </tr>
                                 <tr>
                                     <th colspan="3">Total</th>
-                                    <td>$<?php echo number_format($total, 2); ?></td>
+                                    <td>Ksh<?php echo number_format($total, 2); ?></td>
                                 </tr>
                             </tfoot>
                         </table>

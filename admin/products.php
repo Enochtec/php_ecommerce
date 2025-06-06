@@ -80,7 +80,7 @@ $products = $pdo->query("
                         </td>
                         <td><?php echo $product['name']; ?></td>
                         <td><?php echo $product['category_name'] ?: 'Uncategorized'; ?></td>
-                        <td>$<?php echo number_format($product['price'], 2); ?></td>
+                        <td>Ksh<?php echo number_format($product['price'], 2); ?></td>
                         <td><?php echo $product['stock_quantity']; ?></td>
                         <td>
                             <a href="edit_product.php?id=<?php echo $product['product_id']; ?>" class="btn btn-sm btn-warning">Edit</a>

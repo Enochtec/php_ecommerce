@@ -63,7 +63,7 @@
                     <div class="absolute inset-0 flex items-center justify-center space-x-10 animate-marquee whitespace-nowrap">
                         <div class="flex items-center">
                             <i class="bi bi-truck mr-2"></i>
-                            <span>Free Shipping on Orders $50+</span>
+                            <span>Free Shipping on Orders Ksh 1000+</span>
                         </div>
                         <div class="flex items-center">
                             <i class="bi bi-arrow-repeat mr-2"></i>

@@ -201,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
                                                 <span><?php echo $item['name']; ?></span>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">$<?php echo number_format($item['price'], 2); ?></td>
+                                        <td class="px-6 py-4 whitespace-nowrap">Ksh<?php echo number_format($item['price'], 2); ?></td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center space-x-2">
                                                 <a href="cart.php?action=decrease&id=<?php echo $item['product_id']; ?>" class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">-</a>
@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
                                                 <a href="cart.php?action=increase&id=<?php echo $item['product_id']; ?>" class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">+</a>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                        <td class="px-6 py-4 whitespace-nowrap">Ksh<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="cart.php?action=remove&id=<?php echo $item['product_id']; ?>" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">Remove</a>
                                         </td>
@@ -231,15 +231,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <tr>
                                     <td class="px-0 py-2 whitespace-nowrap font-medium">Subtotal</td>
-                                    <td class="px-0 py-2 whitespace-nowrap text-right">$<?php echo number_format($total, 2); ?></td>
+                                    <td class="px-0 py-2 whitespace-nowrap text-right">Ksh<?php echo number_format($total, 2); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="px-0 py-2 whitespace-nowrap font-medium">Shipping</td>
-                                    <td class="px-0 py-2 whitespace-nowrap text-right">$0.00</td>
+                                    <td class="px-0 py-2 whitespace-nowrap text-right">Ksh0.00</td>
                                 </tr>
                                 <tr>
                                     <td class="px-0 py-2 whitespace-nowrap font-medium">Total</td>
-                                    <td class="px-0 py-2 whitespace-nowrap text-right font-bold">$<?php echo number_format($total, 2); ?></td>
+                                    <td class="px-0 py-2 whitespace-nowrap text-right font-bold">Ksh<?php echo number_format($total, 2); ?></td>
                                 </tr>
                             </tbody>
                         </table>

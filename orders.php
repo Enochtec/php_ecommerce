@@ -49,7 +49,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td class="px-4 py-2"><?php echo $order['order_id']; ?></td>
                             <td class="px-4 py-2"><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
                             <td class="px-4 py-2"><?php echo $order['item_count']; ?></td>
-                            <td class="px-4 py-2">$<?php echo number_format($order['total_amount'], 2); ?></td>
+                            <td class="px-4 py-2">Ksh<?php echo number_format($order['total_amount'], 2); ?></td>
                             <td class="px-4 py-2">
                                 <span class="inline-block px-2 py-1 text-xs font-semibold rounded 
                                     <?php 

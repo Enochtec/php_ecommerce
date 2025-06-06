@@ -157,16 +157,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart']) && isL
             <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200/50">
                 <div class="flex items-baseline space-x-3">
                     <span class="text-4xl font-bold text-green-700">
-                        $<?php echo number_format($product['price'], 2); ?>
+                        Ksh<?php echo number_format($product['price'], 2); ?>
                     </span>
                     <span class="text-lg text-slate-500 line-through">
-                        $<?php echo number_format($product['price'] * 1.2, 2); ?>
+                        Ksh<?php echo number_format($product['price'] * 1.2, 2); ?>
                     </span>
                     <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
                         17% OFF
                     </span>
                 </div>
-                <p class="text-sm text-green-600 mt-2">Free shipping on orders over $50</p>
+                <p class="text-sm text-green-600 mt-2">Free shipping on orders over Ksh 1000</p>
             </div>
 
             <!-- Product Description -->

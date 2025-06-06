@@ -56,7 +56,7 @@ $recent_orders = $pdo->query("
             <div class="card text-white bg-warning">
                 <div class="card-body">
                     <h5 class="card-title">Total Revenue</h5>
-                    <p class="card-text display-4">$<?php echo number_format($total_revenue, 2); ?></p>
+                    <p class="card-text display-4">Ksh<?php echo number_format($total_revenue, 2); ?></p>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@ $recent_orders = $pdo->query("
                                     <td><?php echo $order['order_id']; ?></td>
                                     <td><?php echo $order['username']; ?></td>
                                     <td><?php echo date('M d, Y', strtotime($order['created_at'])); ?></td>
-                                    <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                                    <td>Ksh<?php echo number_format($order['total_amount'], 2); ?></td>
                                     <td>
                                         <span class="badge 
                                             <?php 
