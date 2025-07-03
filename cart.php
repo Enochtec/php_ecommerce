@@ -144,6 +144,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
             
             $pdo->commit();
             
+            // Send order confirmation email
+            $to = $_SESSION['user_email'];
+            $subject = "Order Confirmation #" . $order_id;
+            $message = "
+                <html>
+                <head>
+                    <title>Order Confirmation</title>
+                </head>
+                <body>
+                    <h2>Thank you for your order!</h2>
+                    <p>Order ID: #$order_id</p>
+                    <p>Total Amount: Ksh" . number_format($total, 2) . "</p>
+                    <p>We'll process your order shortly.</p>
+                    <h3>Order Details:</h3>
+                    <ul>
+                        " . implode('', array_map(function($item) {
+                            return "<li>{$item['name']} - {$item['quantity']} x Ksh" . number_format($item['price'], 2) . "</li>";
+                        }, $cart_items)) . "
+                    </ul>
+                </body>
+                </html>
+            ";
+            
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= "From: ewanyama43@gmail.com" . "\r\n";
+            
+            mail($to, $subject, $message, $headers);
+            
             $_SESSION['success'] = 'Order placed successfully!';
             redirect('orders.php');
         } catch (Exception $e) {
@@ -179,6 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
         </div>
     <?php else: ?>
         <div class="flex flex-col md:flex-row gap-6">
+            <!-- Cart Items Section -->
             <div class="w-full md:w-2/3">
                 <div class="bg-white rounded-lg shadow-md mb-6">
                     <div class="p-6">
@@ -221,114 +252,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
                 </div>
             </div>
             
+            <!-- Checkout Summary Section -->
             <div class="w-full md:w-1/3">
-                <div class="bg-white rounded-lg shadow-md">
+                <div class="bg-white rounded-lg shadow-md sticky top-4">
                     <div class="bg-gray-100 px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-medium">Order Summary</h3>
                     </div>
                     <div class="p-6">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td class="px-0 py-2 whitespace-nowrap font-medium">Subtotal</td>
-                                    <td class="px-0 py-2 whitespace-nowrap text-right">Ksh<?php echo number_format($total, 2); ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-0 py-2 whitespace-nowrap font-medium">Shipping</td>
-                                    <td class="px-0 py-2 whitespace-nowrap text-right">Ksh0.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-0 py-2 whitespace-nowrap font-medium">Total</td>
-                                    <td class="px-0 py-2 whitespace-nowrap text-right font-bold">Ksh<?php echo number_format($total, 2); ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                        <button id="checkoutButton" class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                            Proceed to Checkout
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Checkout Modal -->
-        <div id="checkoutModal" class="hidden fixed inset-0 overflow-y-auto z-50">
-            <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Checkout</h3>
-                                <form method="POST" class="w-full">
-                                    <div class="mb-4">
-                                        <label for="shipping_address" class="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
-                                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" id="shipping_address" name="shipping_address" required></textarea>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="billing_address" class="block text-sm font-medium text-gray-700 mb-1">Billing Address</label>
-                                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" id="billing_address" name="billing_address" required></textarea>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="payment_method" class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
-                                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" id="payment_method" name="payment_method" required>
-                                            <option value="">Select Payment Method</option>
-                                            <option value="credit_card">Credit Card</option>
-                                            <option value="paypal">PayPal</option>
-                                            <option value="bank_transfer">Bank Transfer</option>
-                                            <option value="cash_on_delivery">Cash on Delivery</option>
-                                        </select>
-                                    </div>
-                                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                        <button type="submit" name="checkout" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                            Place Order
-                                        </button>
-                                        <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                            Close
-                                        </button>
-                                    </div>
-                                </form>
+                        <div class="space-y-4">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Subtotal</span>
+                                <span>Ksh<?php echo number_format($total, 2); ?></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">Shipping</span>
+                                <span>Ksh0.00</span>
+                            </div>
+                            <div class="border-t border-gray-200 pt-4 flex justify-between font-bold">
+                                <span>Total</span>
+                                <span>Ksh<?php echo number_format($total, 2); ?></span>
                             </div>
                         </div>
+                        
+                        <!-- Checkout Form -->
+                        <form method="POST" class="mt-6 space-y-4">
+                            <div>
+                                <label for="shipping_address" class="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
+                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" id="shipping_address" name="shipping_address" required><?php echo isset($_POST['shipping_address']) ? htmlspecialchars($_POST['shipping_address']) : ''; ?></textarea>
+                            </div>
+                            
+                            <div>
+                                <label for="billing_address" class="block text-sm font-medium text-gray-700 mb-1">Billing Address</label>
+                                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" id="billing_address" name="billing_address" required><?php echo isset($_POST['billing_address']) ? htmlspecialchars($_POST['billing_address']) : ''; ?></textarea>
+                            </div>
+                            
+                            <div>
+                                <label for="payment_method" class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" id="payment_method" name="payment_method" required>
+                                    <option value="">Select Payment Method</option>
+                                    <option value="credit_card" <?php echo (isset($_POST['payment_method']) && $_POST['payment_method'] === 'credit_card') ? 'selected' : ''; ?>>Credit Card</option>
+                                    <option value="paypal" <?php echo (isset($_POST['payment_method']) && $_POST['payment_method'] === 'paypal') ? 'selected' : ''; ?>>PayPal</option>
+                                    <option value="bank_transfer" <?php echo (isset($_POST['payment_method']) && $_POST['payment_method'] === 'bank_transfer') ? 'selected' : ''; ?>>Bank Transfer</option>
+                                    <option value="cash_on_delivery" <?php echo (isset($_POST['payment_method']) && $_POST['payment_method'] === 'cash_on_delivery') ? 'selected' : ''; ?>>Cash on Delivery</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" name="checkout" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                Place Order
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <script>
-            // Get the modal and button elements
-            const modal = document.getElementById('checkoutModal');
-            const checkoutButton = document.getElementById('checkoutButton');
-            
-            // Function to open modal
-            function openModal() {
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            // Function to close modal
-            function closeModal() {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-            
-            // Event listener for checkout button
-            checkoutButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                openModal();
-            });
-            
-            // Close modal when clicking outside of it
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    closeModal();
-                }
-            });
-        </script>
     <?php endif; ?>
 </div>
 
